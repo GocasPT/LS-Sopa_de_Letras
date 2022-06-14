@@ -1,0 +1,38 @@
+/*
+    Custom page
+*/
+html{
+    overflow: hidden; /* Hide scrollbars */
+}
+
+body{
+    background-color: #141a22;
+}
+
+button, input:hover{
+    cursor: pointer;
+}
+
+/*
+    Class
+*/
+.vertical-middle{
+    position: relative;
+    left: 49%;
+}
+
+.invisibel{
+    background: none;
+    border: none;
+}
+
+
+/*
+    Animations
+*/
+.fadeOut{
+    animation:opacOut 0.8s;
+    opacity: 0;
+}@keyframes opacOut{
+    from{opacity:1} to{opacity:0}
+}

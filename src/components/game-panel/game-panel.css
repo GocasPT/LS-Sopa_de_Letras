@@ -1,0 +1,8 @@
+#game-control{
+    border: 2px solid yellow;
+    background-color: white;
+}
+
+#game-control .list:not(.gameStarted){
+    display: none;
+}

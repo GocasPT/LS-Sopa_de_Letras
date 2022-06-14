@@ -1,2 +1,6 @@
-export { default as ControlPanel } from "./control-panel/control-panel-componet";
-export { default as Header } from "./header/heard-componet";
+export { default as Background } from "./background/background.componet"
+export { default as Board } from "./board/board.compoent"
+export { default as Footer } from "./footer/footer.componet"
+export { default as GamePanel } from "./game-panel/game-panel.componet"
+export { default as Square } from "./square/square.components"
+export { default as Title } from "./title/title.componet"

@@ -1,0 +1,51 @@
+import React from "react";
+import "./background.css";
+
+import {
+    LETTERS,
+    PATHOLDER_LETTERS_PATH,
+} from "../../constants";
+
+function Background({ height, weight }) {
+    const gackgroundRow = (index, max) => {
+        let rows = [];
+
+        for (index; index < max; index++) {
+            let letter = LETTERS[Math.floor(Math.random()*LETTERS.length)];
+
+            rows.push(
+                <img 
+                    key={index}
+                    src={`${PATHOLDER_LETTERS_PATH}${letter}.png`} 
+                    alt={`${letter}`} 
+                />
+            );
+        };
+
+        return rows;
+    };
+
+    const generateBackground = (rows) => {
+        let background = [];
+
+        for(let i=0; i< rows * 1.5; i++){
+            background.push(
+                <div className="row" key={i}>
+                    <div>
+                        {gackgroundRow(i, weight*2/50)}
+                    </div>
+                </div>
+            )
+        };
+
+        return background;  
+    }
+
+    return(
+        <section id="background">
+            { generateBackground(height/100) }
+        </section>
+    )
+}
+
+export default Background;
