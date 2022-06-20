@@ -6,7 +6,12 @@ import {
     PATHOLDER_LETTERS_PATH,
 } from "../../constants";
 
-function Background({ height, weight }) {
+function Background({ display, height, weight }) {
+    const displayClass =
+        display
+        ? ""
+        : "hide"
+
     const gackgroundRow = (index, max) => {
         let rows = [];
 
@@ -32,7 +37,7 @@ function Background({ height, weight }) {
             background.push(
                 <div className="row" key={i}>
                     <div>
-                        {gackgroundRow(i, weight*2/50)}
+                        {gackgroundRow(i, weight*2/25)}
                     </div>
                 </div>
             )
@@ -42,7 +47,7 @@ function Background({ height, weight }) {
     }
 
     return(
-        <section id="background">
+        <section id="background" className={displayClass}>
             { generateBackground(height/100) }
         </section>
     )

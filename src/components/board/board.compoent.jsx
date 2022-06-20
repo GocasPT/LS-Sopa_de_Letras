@@ -3,7 +3,7 @@ import "./board.css"
 
 import Square from "../square/square.components"
 
-function Board() {
+function Board({ boardSize, onSelect }) {
     const generateRow = (index, max) => {
         let rows = [];
 
@@ -11,6 +11,7 @@ function Board() {
             rows.push(
                 <Square
                     key={index}
+                    onSelect={onSelect}
                 />
             );
         };
@@ -35,8 +36,8 @@ function Board() {
     }
 
     return(
-        <section id="board" className="w3-half vertical-middle">
-            {generateBoard(8,8)}
+        <section id="board" className="">
+            {generateBoard(boardSize,boardSize)}
         </section>
     )
 };

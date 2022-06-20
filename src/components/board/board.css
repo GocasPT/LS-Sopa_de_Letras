@@ -1,3 +1,14 @@
-.board{
+#board{
     border: 1px solid black;
+    width: auto;
+    margin-left: 20%;
+}
+
+#board .row button{
+    width: 40px;
+    height: 40px;
+}
+
+#board .row button:active{
+    background-color: red;
 }

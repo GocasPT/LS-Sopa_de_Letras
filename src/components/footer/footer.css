@@ -34,6 +34,7 @@
 .footer-section .config-panel div{
     flex: 1;
     background-color: #1E1C33;
+    height: 50%;
 }
 
 .footer-section .config-panel input{
@@ -77,7 +78,7 @@ li *{
     animation: goToBotton 0.2s linear;
 }@keyframes goToBotton{
     0%{
-        top: 0;
+        top: 30%;
     }
     100%{
         top: 88%;
@@ -86,14 +87,14 @@ li *{
 }
 
 .footer-section.show-config{
-    top: 0;
+    top: 30%;
     animation: goToTop 0.2s linear;
 }@keyframes goToTop{
     0%{
-        top: 88%;
+        top: 30%;
     }
     100%{
-        top: 0;
+        top: 30%;
     }
 
 }

@@ -27,6 +27,7 @@ export const LETTERS = [
     "Z",
 ];
 
+export const TIMEOUTGAME = 10; //   seconds
 export const WINDOWS_HEIGHT = window.innerHeight;   //  Valor da altura da janela
 export const WINDOWS_WEIGHT = window.innerWidth;    //  Valor do comprimento da janela
 export const PATHOLDER_LETTERS_PATH = "/assets/letters/";   //  Path para a pasta "letters"

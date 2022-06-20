@@ -1,8 +1,12 @@
 import React from "react"
 
-function Square() {
+function Square({ onSelect }) {
     return(
-        <button>0</button>
+        <button 
+            onClick={onSelect}
+        >
+            0
+        </button>
     )
 }
 

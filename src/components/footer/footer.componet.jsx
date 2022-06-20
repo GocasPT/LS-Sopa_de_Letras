@@ -1,7 +1,7 @@
 import React from "react";
 import "./footer.css"
 
-function Footer({ gameStarted, onBackground, configShow, onConfig }) {
+function Footer({ gameStarted, onLevelChange, onModeChange, onBackground, configShow, onConfig }) {
     const gameClass =
         gameStarted
         ? "fadeOut"
@@ -39,37 +39,27 @@ function Footer({ gameStarted, onBackground, configShow, onConfig }) {
                     <div className="w3-panel w3-border w3-border-amber w3-round-xlarge grid">
                         <div className="level-selecter">
                             <p className="w3-text-white">Selação de nível:</p>
-                            <ul>
-                                <li>
-                                    <input className="w3-radio" type="radio" name="level" value="1" /* checked *//>
-                                    <label className="w3-text-white">1</label>
-                                </li>
-                                <li>
-                                    <input className="w3-radio" type="radio" name="level" value="2" />
-                                    <label className="w3-text-white">2</label>
-                                </li>
-                                <li>
-                                    <input className="w3-radio" type="radio" name="level" value="3" />
-                                    <label className="w3-text-white">3</label>
-                                </li>
-                            </ul>
+                            <select 
+                                defaultValue="0"
+                                onChange={onLevelChange}
+                            >
+                                <option value="0">Selecione...</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
                         </div>
                         <div className="mode-selecter">
                             <p className="w3-text-white">Modo de jogo:</p>
-                            <ul>
-                                <li>
-                                    <input className="w3-radio" type="radio" name="mode" value="1" /* checked *//>
-                                    <label className="w3-text-white">Método normal</label>
-                                </li>
-                                <li>
-                                    <input className="w3-radio" type="radio" name="mode" value="2" />
-                                    <label className="w3-text-white">Método categoria</label>
-                                </li>
-                                <li>
-                                    <input className="w3-radio" type="radio" name="mode" value="3" />
-                                    <label className="w3-text-white">Custom - Escolha de palavras</label>
-                                </li>
-                            </ul>
+                            <select
+                                defaultValue="0"
+                                onChange={onModeChange}
+                            >
+                                <option value="0">Selecione...</option>
+                                <option value="1">Método normal</option>
+                                <option value="2">Método categoria</option>
+                                <option value="3">Custom - Escolha de palavras</option>
+                            </select>
                         </div>
                     </div>
                 </div>

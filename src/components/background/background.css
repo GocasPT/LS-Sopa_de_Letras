@@ -1,6 +1,6 @@
 #background {
     position: absolute;
-    top: -20%;
+    top: -40%;
     left: -10%;
     z-index: -100;
 }
@@ -20,26 +20,14 @@
     padding: 10px 10px;
 }
 
-#background .row img:hover{
-    transform: scale(1.5);
-    animation: scaling 0.2s linear;
-}@keyframes scaling{
-    0%{
-        transform: scale(1);
-    }
-    100%{
-        transform: scale(1.5);
-    }
-}
-
 #background .row div{
-    animation: animate 80s linear infinite;
-    animation-delay: -80s;
+    animation: animate 240s linear infinite;
+    animation-delay: -240s;
 }@keyframes animate{
     0%{
-        transform: translateX(5%);
+        transform: translateX(0%);
     }
     100%{
-        transform: translateX(-50%);
+        transform: translateX(-100%);
     }
 } 

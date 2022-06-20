@@ -5,7 +5,7 @@ import {
     GamePanel,
 } from "../"
 
-function Title({ gameStarted, onGameStart, animationEnd, onAnimation}) {
+function Title({ gameStarted, onGameStart, animationEnd, onAnimation, selectedLevel, selectedMode, boardSize}) {
     const gameClass =
         gameStarted
         ? "fadeOut"
@@ -22,7 +22,13 @@ function Title({ gameStarted, onGameStart, animationEnd, onAnimation}) {
             <section id="title" onAnimationEnd={onAnimation} className={`title ${gameClass}`}>
                 <img src="/assets/SopaDeLetras-Logo.png" alt="" className="logo" />
                 <input type="text" className="w3-input w3-text-white w3-border w3-border-amber w3-round-xxlarge" placeholder="Nickname" onKeyDown={handleEnter}/>
-                <button type="button" onClick={onGameStart} className="w3-button w3-amber w3-hover-yellow w3-round-xxlarge">Jogar</button>
+                <button className="w3-button w3-amber w3-hover-yellow w3-round-xxlarge"
+                    type="button" 
+                    disabled={(selectedLevel === "0" || selectedMode === "0")}
+                    onClick={onGameStart}  
+                >
+                    Jogar
+                </button>
             </section>
         );
     }
@@ -31,6 +37,7 @@ function Title({ gameStarted, onGameStart, animationEnd, onAnimation}) {
         <GamePanel
             gameStarted={gameStarted}
             onGameStart={onGameStart}
+            boardSize={boardSize}
         />
     )
 }
