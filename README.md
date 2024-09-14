@@ -9,6 +9,6 @@ Trabalho prático feita por:
 Nota: 35%
 
 Funções em falta:
-[ ] Ligaração da geração das palavras na grelha
-[ ] Pontuação
-[ ] [Muita parte do trabalho]
+- [ ] Ligaração da geração das palavras na grelha
+- [ ] Pontuação
+- [ ] [Muita parte do trabalho]
