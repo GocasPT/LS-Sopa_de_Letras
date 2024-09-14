@@ -1,138 +1,45 @@
-import React, { useState } from 'react';
-import "./assets/styles/App.css"
-
-import {
-    WINDOWS_HEIGHT,
-    WINDOWS_WEIGHT,
-} from "./constants"
-
-import {
-    Footer,
-    Title,
-    Background,
-} from "./components"
-
-let boardSize;
-let modeGame;
+import { useState } from 'react';
+import { LEVELS, LEVELS_CONFIG } from './constants';
+import { ControlPanel, GamePanel } from './components';
+import './assets/styles/App.css';
 
 function App() {
-    const [gameStarted, setGameStarted] = useState(false);
-    const [selectedLevel, setSelectionLevl] = useState("0");
-    const [selectedMode, setSelectionMode] = useState("0");
-    const [configShow, setConfigShow] = useState(false);
+  const levels = [{ value: '', text: '-- Select level --' }, ...LEVELS];
 
-    //const [gameOver, setGamerOver] = useState(false)
-    //const [totalPoints, setTotalPoints] = useState(0);
+  const [boardConfig, setBoardConfig] = useState(LEVELS_CONFIG[0]);
+  const [words, setWords] = useState([]);
+  const [gameStart, setGameStart] = useState(false);
 
-    const [animationEnd, onAnimation] = useState(false);
-    const [backgroundOn, setBackground] = useState(true);
-    
-    const handleGameStart = () => {
-        if (gameStarted) {
-            console.log("Termina Jogo");
-            setGameStarted(false);
-            onAnimation(false)
-        } else {
-            console.log("Inicia Jogo");
-            setGameStarted(true);
-        }
-    };
+  const handleSelectLevel = (level) => {
+    setBoardConfig(LEVELS_CONFIG.find((config) => config.value === level) || LEVELS_CONFIG[0]);
+  };
 
-    const handleCondif = () => {
-        if (configShow) {
-          console.log("Config fecha");
-          setConfigShow(false);
-        } else {
-          console.log("Config aberta");
-          setConfigShow(true);
-        }
-    };
+  const handleGameStart = () => {
+    setGameStart(true);
 
-    const handleLevelChange = (event) => {
-        const { value } = event.currentTarget;
-        setSelectionLevl(value)
+    //TODO: select words fomr list + custom words from user
+    setWords(['Olá', 'Batata', 'Cenoura', 'Cebola', 'Alface']);
+  };
 
-        switch (value) {
-            // Level: Beginner
-            case '1':
-                boardSize = 8;
-              break;
-            // Level: Intermediate
-            case '2':
-                boardSize = 12;
-              break;
-            // Level: Advanced
-            case '3':
-                boardSize = 15;
-              break;
-            default:
-                boardSize = 0;
-              break;
-          }
-    }
+  /*useEffect(() => {
+		if (!gameStart) {
+			//TODO: show alert message 'GAME OVER' (clear board or later?)
+			setBoard([]);
+			return;
+		};
+	}, [gameStart])*/
 
-    const handleModeChange = (event) => {
-        const { value } = event.currentTarget;
-        setSelectionMode(value)
-
-        switch (value) {
-            // Level: Beginner
-            case '1':
-                modeGame = 8;
-              break;
-            // Level: Intermediate
-            case '2':
-                modeGame = 12;
-              break;
-            // Level: Advanced
-            case '3':
-                modeGame = 15;
-              break;
-            default:
-                modeGame = 0;
-              break;
-          }
-    }
-
-    const handleAnimation = () => {
-        if(gameStarted){
-            onAnimation(true)
-        }
-    };
-
-    const handleBackground = () => {
-        if (backgroundOn) {
-            setBackground(false);
-          } else {
-            setBackground(true);
-          }
-    };
-
-    return (
-        <div>
-            <Title 
-                gameStarted={gameStarted}
-                onGameStart={handleGameStart}
-                animationEnd={animationEnd}
-                onAnimation={handleAnimation}
-                selectedLevel={selectedLevel}
-                selectedMode={selectedMode}
-                boardSize={boardSize}
-            />
-            <Footer 
-                gameStarted={gameStarted}
-                onLevelChange={handleLevelChange}
-                onModeChange={handleModeChange}
-                onBackground={handleBackground}
-                configShow={configShow}
-                onConfig={handleCondif}
-            />
-            <Background
-                display={backgroundOn}
-                height={WINDOWS_HEIGHT}
-                weight={WINDOWS_WEIGHT}
-            />
-        </div>
-    )
+  return (
+    <main>
+      <ControlPanel
+        levels={levels}
+        selectedLevel={boardConfig.value}
+        onSelectLevel={(level) => handleSelectLevel(level)}
+        isGameStarted={gameStart}
+        onGameStart={() => handleGameStart()}
+      />
+      <GamePanel boardSize={boardConfig.size} wordsList={words} />
+    </main>
+  );
 }
 export default App;

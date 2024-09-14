@@ -1,45 +1,23 @@
-import React from "react"
-import "./board.css"
+import { useEffect } from 'react';
+import { Cell } from '../';
+import './board.css';
 
-import Square from "../square/square.components"
+function Board({ board, onSelect }) {
+  useEffect(() => {
+    console.log('Board: ', board);
+  }, [board]);
 
-function Board({ boardSize, onSelect }) {
-    const generateRow = (index, max) => {
-        let rows = [];
-
-        for (index; index < max; index++) {
-            rows.push(
-                <Square
-                    key={index}
-                    onSelect={onSelect}
-                />
-            );
-        };
-
-        return rows;
-    };
-
-    const generateBoard = (columns, rows) => {
-        let board = [];
-
-        for(let i=0; i< columns * rows; i++){
-            if(i%columns === 0){
-                board.push(
-                    <div className="row" key={i}>
-                        {generateRow(i, i + columns)}
-                    </div>
-                )
-            }
-        };
-
-        return board;
-    }
-
-    return(
-        <section id="board" className="">
-            {generateBoard(boardSize,boardSize)}
-        </section>
-    )
-};
+  return (
+    <section id="board" className="">
+      {board.map((row, index) => (
+        <div className="row" key={index}>
+          {row.map((data, index) => (
+            <Cell key={index} letter={data} onSelect={() => onSelect(index)} />
+          ))}
+        </div>
+      ))}
+    </section>
+  );
+}
 
 export default Board;
