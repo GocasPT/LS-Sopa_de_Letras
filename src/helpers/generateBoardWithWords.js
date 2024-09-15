@@ -14,6 +14,8 @@ const Diraction = [
 function generateBoardWithWords(size, words) {
   let board = generateBoard(size);
 
+  words = words.map((word) => word.toUpperCase());
+
   words.forEach((word) => {
     let wordPlaced = false;
     while (!wordPlaced) {
