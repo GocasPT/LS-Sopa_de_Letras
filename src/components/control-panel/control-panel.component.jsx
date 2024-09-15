@@ -1,3 +1,5 @@
+import './control-panel.css';
+
 function ControlPanel({ levels, selectedLevel, onSelectLevel, isGameStarted, onGameStart }) {
   return (
     <section>

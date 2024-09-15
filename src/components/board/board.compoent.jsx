@@ -9,10 +9,10 @@ function Board({ board, onSelect }) {
 
   return (
     <section id="board" className="">
-      {board.map((row, index) => (
-        <div className="row" key={index}>
-          {row.map((data, index) => (
-            <Cell key={index} letter={data} onSelect={() => onSelect(index)} />
+      {board.map((row, rowIndex) => (
+        <div className="row" key={rowIndex}>
+          {row.map((letter, colIndex) => (
+            <Cell key={colIndex} letter={letter} onSelect={() => onSelect(rowIndex, colIndex)} />
           ))}
         </div>
       ))}
