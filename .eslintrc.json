@@ -1,9 +1,19 @@
 {
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "env": {
         "browser": true,
         "es2021": true
     },
-    "extends": ["plugin:react/recommended", "standard", "prettier"],
+    "extends": [
+        "plugin:react/recommended",
+        "standard",
+        "eslint:recommended",
+        "prettier"
+    ],
     "overrides": [],
     "parserOptions": {
         "ecmaVersion": "latest",
