@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Board } from '../';
-import { generateBoard, generateBoardWithWords, getWord } from '../../helpers';
+import { generateBoard, generateBoardWithWords, getWord, highlightCells } from '../../helpers';
 import './game-panel.css';
 
 function GamePanel({ boardSize, wordsList }) {
-  const [board, setBoard] = useState([[]]);
+  const [board, setBoard] = useState([]);
   const [selectedCells, setSelectedCells] = useState([]);
   const [foundWords, setFoundWords] = useState([]);
 
@@ -15,8 +15,9 @@ function GamePanel({ boardSize, wordsList }) {
     wordsList.forEach((word) => {
       word = word.toUpperCase();
 
-      if (word === selectedWord) {
+      if (word === selectedWord || word === selectedWord.split('').reverse().join('')) {
         setFoundWords((previouseState) => [...previouseState, word]);
+        setBoard(highlightCells(cell1, cell2, board));
       }
     });
 
@@ -38,23 +39,23 @@ function GamePanel({ boardSize, wordsList }) {
   }, [selectedCells]);
 
   return (
-    <section>
-      {boardSize === 0 ? null : (
+    <section className="gamePanel">
+      {boardSize > 0 ? (
         <Board
           board={board}
+          boardSize={boardSize}
           onSelect={(row, col) =>
             setSelectedCells((previouseState) => [...previouseState, { row: row, col: col }])
           }
         />
-      )}
+      ) : null}
       {wordsList.length ? (
         <div>
           <p>Words:</p>
           <ul>
             {wordsList.map((word, index) => (
-              <li key={index}>
+              <li key={index} className={foundWords.includes(word.toUpperCase()) ? 'done' : ''}>
                 {word}
-                {foundWords.includes(word.toUpperCase()) ? '✅' : ''}
               </li>
             ))}
           </ul>

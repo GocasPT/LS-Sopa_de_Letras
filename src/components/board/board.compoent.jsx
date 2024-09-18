@@ -1,22 +1,19 @@
-import { useEffect } from 'react';
 import { Cell } from '../';
 import './board.css';
 
-function Board({ board, onSelect }) {
-  useEffect(() => {
-    console.log('Board: ', board);
-  }, [board]);
-
+function Board({ board, boardSize, onSelect }) {
   return (
-    <section id="board" className="">
-      {board.map((row, rowIndex) => (
-        <div className="row" key={rowIndex}>
-          {row.map((letter, colIndex) => (
-            <Cell key={colIndex} letter={letter} onSelect={() => onSelect(rowIndex, colIndex)} />
-          ))}
-        </div>
+    <div
+      className="board"
+      style={{
+        display: 'grid',
+        gridTemplateColumns: `repeat(${boardSize}, 1fr)`,
+        gridTemplateRows: `repeat(${boardSize}, 1fr)`
+      }}>
+      {board.map((item, index) => (
+        <Cell key={index} item={item} onSelect={() => onSelect(item.row, item.col)} />
       ))}
-    </section>
+    </div>
   );
 }
 

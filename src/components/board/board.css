@@ -1,0 +1,19 @@
+.board {
+  border: 1px solid #000;
+}
+
+.board button {
+  height: 2vw;
+  width: 2vw;
+  font-weight: 200;
+  min-height: 20px;
+  min-width: 20px;
+  max-height: 40px;
+  max-width: 40px;
+}
+
+.highlight {
+  background-color: #ffeb3b;
+}
+
+/*TODO: multiples types of colors for highlight*/

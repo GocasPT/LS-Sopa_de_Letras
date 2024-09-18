@@ -26,18 +26,20 @@ function generateBoardWithWords(size, words) {
 
       if (canPlaceWord(board, word, row, col, chooseDirection)) {
         for (let i = 0; i < wordSize; i++) {
-          board[row + i * chooseDirection.row][col + i * chooseDirection.col] = word[i];
+          board.find(
+            (cell) =>
+              cell.row === row + i * chooseDirection.row &&
+              cell.col === col + i * chooseDirection.col
+          ).letter = word[i];
         }
         wordPlaced = true;
       }
     }
   });
 
-  for (let i = 0; i < size; i++) {
-    for (let j = 0; j < size; j++) {
-      if (board[i][j] === '') {
-        board[i][j] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-      }
+  for (let i = 0; i < size * size; i++) {
+    if (board[i].letter === '') {
+      board[i].letter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
     }
   }
 
@@ -53,7 +55,10 @@ function canPlaceWord(board, word, row, col, direction) {
       return false;
     }
 
-    if (board[x][y] !== '' && board[x][y] !== word[i]) {
+    if (
+      board.find((cell) => cell.row === x && cell.col === y)?.letter !== '' &&
+      board.find((cell) => cell.row === x && cell.col === y)?.letter !== word[i]
+    ) {
       return false;
     }
   }

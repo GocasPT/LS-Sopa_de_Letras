@@ -1,7 +1,9 @@
-import './cell.css';
-
-function Cell({ letter, onSelect }) {
-  return <button onClick={onSelect}>{letter}</button>;
+function Cell({ item, onSelect }) {
+  return (
+    <button onClick={onSelect} className={item.highlight ? 'highlight' : ''}>
+      {item.letter}
+    </button>
+  );
 }
 
 export default Cell;

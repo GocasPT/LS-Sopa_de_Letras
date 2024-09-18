@@ -1,0 +1,12 @@
+.gamePanel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #000;
+  padding: 10px;
+}
+
+li.done {
+    text-decoration: line-through;
+}

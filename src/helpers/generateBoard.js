@@ -1,12 +1,13 @@
 function generateBoard(size) {
   let board = [];
 
-  for (let i = 0; i < size; i++) {
-    let row = [];
-    for (let j = 0; j < size; j++) {
-      row.push('');
-    }
-    board.push(row);
+  for (let i = 0; i < size * size; i++) {
+    board.push({
+      letter: '',
+      row: Math.floor(i / size),
+      col: i % size,
+      highlight: false
+    });
   }
 
   return board;
