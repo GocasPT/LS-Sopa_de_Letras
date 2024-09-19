@@ -1,5 +1,18 @@
 .board {
     border: 1px solid #000;
+    display: grid;
+}
+
+.board--easy {
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.board--normal {
+    grid-template-columns: repeat(20, 1fr);
+}
+
+.board--hard {
+    grid-template-columns: repeat(30, 1fr);
 }
 
 .board button {
@@ -13,7 +26,47 @@
 }
 
 .highlight {
-    background-color: #ffeb3b;
+    background-color: yellow;
 }
 
-/*TODO: multiples types of colors for highlight*/
+/*TODO: make highligth system work*/
+
+.highlight#1 {
+    background-color: yellow;
+}
+
+.highlight#2 {
+    background-color: orange;
+}
+
+.highlight#3 {
+    background-color: mediumseagreen;
+}
+
+.highlight#4 {
+    background-color: blue;
+}
+
+.highlight#5 {
+    background-color: purple;
+}
+
+.highlight#6 {
+    background-color: pink;
+}
+
+.highlight#7 {
+    background-color: cyan;
+}
+
+.highlight#8 {
+    background-color: red;
+}
+
+.highlight#9 {
+    background-color: green;
+}
+
+.highlight#10 {
+    background-color: magenta;
+}

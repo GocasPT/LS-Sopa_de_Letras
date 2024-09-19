@@ -25,24 +25,32 @@ export const LETTERS = [
     'X',
     'Y',
     'Z',
-]
+];
 
-export const TIMEOUTGAME = 10 //   seconds
-export const WINDOWS_HEIGHT = window.innerHeight //  Valor da altura da janela
-export const WINDOWS_WEIGHT = window.innerWidth //  Valor do comprimento da janela
-export const PATHOLDER_LETTERS_PATH = '/assets/letters/' //  Path para a pasta "letters"
-
-export const LEVELS = [
-    { value: 'easy', text: 'Easy' },
-    { value: 'normal', text: 'Normal' },
-    { value: 'hard', text: 'Hard' },
-]
+export const WINDOWS_HEIGHT = window.innerHeight; //  Valor da altura da janela
+export const WINDOWS_WEIGHT = window.innerWidth; //  Valor do comprimento da janela
+export const PATHOLDER_LETTERS_PATH = '/assets/letters/'; //  Path para a pasta "letters"
 
 export const LEVELS_CONFIG = [
-    { value: '', size: 0, words: 0 }, // default
-    { value: LEVELS[0].value, size: 15, words: 5 }, // easy
-    { value: LEVELS[1].value, size: 25, words: 10 }, // normal
-    { value: LEVELS[2].value, size: 50, words: 15 }, // hard
-]
+    { value: '', size: 0, words: 0, time: 0 }, // default
+    { value: '1', size: 10, words: 5, time: 120 }, // easy
+    { value: '2', size: 20, words: 10, time: 90 }, // normal
+    { value: '3', size: 30, words: 15, time: 60 }, // hard
+];
 
-export const WORDS_FILE = '' //TODO: link to words file
+export const LEVELS = [
+    {
+        value: LEVELS_CONFIG[1].value,
+        text: 'Easy (words:' + LEVELS_CONFIG[1].words + ')',
+    },
+    {
+        value: LEVELS_CONFIG[2].value,
+        text: 'Normal (words:' + LEVELS_CONFIG[2].words + ')',
+    },
+    {
+        value: LEVELS_CONFIG[3].value,
+        text: 'Hard (words:' + LEVELS_CONFIG[3].words + ')',
+    },
+];
+
+export const WORDS_FILE = ''; // TODO: link to words file

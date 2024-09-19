@@ -1,16 +1,19 @@
-import { Cell } from '../'
-import './board.css'
+import { Cell } from '../';
+import { LEVELS_CONFIG } from '../../constants';
+import './board.css';
 
 function Board({ board, boardSize, onSelect }) {
+    const classNameGrid =
+        boardSize === LEVELS_CONFIG[1].size
+            ? 'board--easy'
+            : boardSize === LEVELS_CONFIG[2].size
+              ? 'board--normal'
+              : boardSize === LEVELS_CONFIG[3].size
+                ? 'board--hard'
+                : '';
+
     return (
-        <div
-            className="board"
-            style={{
-                display: 'grid',
-                gridTemplateColumns: `repeat(${boardSize}, 1fr)`,
-                gridTemplateRows: `repeat(${boardSize}, 1fr)`,
-            }}
-        >
+        <div className={'board ' + classNameGrid}>
             {board.map((item, index) => (
                 <Cell
                     key={index}
@@ -19,7 +22,7 @@ function Board({ board, boardSize, onSelect }) {
                 />
             ))}
         </div>
-    )
+    );
 }
 
-export default Board
+export default Board;
