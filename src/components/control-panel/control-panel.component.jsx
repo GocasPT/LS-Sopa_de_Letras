@@ -2,7 +2,6 @@ import { useState } from 'react';
 import './control-panel.css';
 
 function ControlPanel({
-    levels,
     gameStarted,
     onGameStart,
     selectedLevel,
@@ -13,63 +12,47 @@ function ControlPanel({
     const [showCustomWords, setShowCustomWords] = useState(false);
     const [wordInput, setWordInput] = useState('');
 
-    const handlerAddWord = (event) => {
-        event.preventDefault();
-        if (wordInput.trim()) {
-            onCustomWords(wordInput.trim());
-            setWordInput('');
-        }
+    const handleLevelChange = (event) => {
+        onSelectLevel(event.target.value);
+    };
+
+    const handleAddCustomWord = (word) => {
+        onCustomWords((prevCustomWords) => [...prevCustomWords, word]);
     };
 
     return (
-        <section>
-            <form>
-                <fieldset disabled={gameStarted}>
-                    <label htmlFor="selectLevel">Level: </label>
-                    <select
-                        id="selectLevel"
-                        onChange={(event) => onSelectLevel(event.target.value)}>
-                        <option value="" defaultChecked>
-                            -- Select level --
-                        </option>
-                        {levels.map((level, index) => (
-                            <option key={index} value={level.value}>
-                                {level.text}
-                            </option>
-                        ))}
-                    </select>
-                </fieldset>
-                <button onClick={setShowCustomWords(!showCustomWords)}>
-                    {showCustomWords ? 'Hide' : 'Show'}
-                </button>
-                {showCustomWords && (
-                    <fieldset disabled={gameStarted}>
-                        <label htmlFor="customWord">Add your word: </label>
-                        <input
-                            type="text"
-                            id="customWord"
-                            value={wordInput}
-                            onChange={(event) =>
-                                setWordInput(event.target.value)
-                            }
-                        />
-                        <button
-                            onClick={handlerAddWord}
-                            disabled={wordInput.length === 0}>
-                            Submit
-                        </button>
+        <div className="control-panel">
+            <select value={selectedLevel} onChange={handleLevelChange}>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            <button
+                onClick={() => setShowCustomWords((prevState) => !prevState)}>
+                Custom words
+            </button>
+            {showCustomWords && (
+                <div>
+                    <input
+                        type="text"
+                        placeholder="Add your word"
+                        value={wordInput}
+                        onChange={(event) => setWordInput(event.target.value)}
+                    />
+                    <button onClick={() => handleAddCustomWord(wordInput)}>
+                        Add
+                    </button>
+                    <ul>
                         {customWords.map((word, index) => (
-                            <p key={index}>{word}</p>
+                            <li key={index}>{word}</li>
                         ))}
-                    </fieldset>
-                )}
-                <button
-                    disabled={selectedLevel === levels[0].value || gameStarted}
-                    onClick={onGameStart}>
-                    {gameStarted ? 'In game...' : 'Start'}
-                </button>
-            </form>
-        </section>
+                    </ul>
+                </div>
+            )}
+            <button onClick={onGameStart} disabled={gameStarted}>
+                {gameStarted ? 'In game...' : 'Start'}
+            </button>
+        </div>
     );
 }
 
