@@ -53,4 +53,4 @@ export const LEVELS = [
     },
 ];
 
-export const WORDS_FILE = ''; // TODO: link to words file
+export const WORDS_DIR = ''; // TODO: link to words dir

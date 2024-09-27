@@ -25,11 +25,15 @@
     max-width: 40px;
 }
 
+/*TODO: make highligth system work*/
+
+.board button:hover {
+    background-color: red;
+}
+
 .highlight {
     background-color: yellow;
 }
-
-/*TODO: make highligth system work*/
 
 .highlight#1 {
     background-color: yellow;

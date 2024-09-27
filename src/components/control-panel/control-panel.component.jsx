@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './control-panel.css';
 
 function ControlPanel({
@@ -6,8 +7,19 @@ function ControlPanel({
     onGameStart,
     selectedLevel,
     onSelectLevel,
+    customWords,
+    onCustomWords,
 }) {
-    // TODO: array to handle custom words
+    const [showCustomWords, setShowCustomWords] = useState(false);
+    const [wordInput, setWordInput] = useState('');
+
+    const handlerAddWord = (event) => {
+        event.preventDefault();
+        if (wordInput.trim()) {
+            onCustomWords(wordInput.trim());
+            setWordInput('');
+        }
+    };
 
     return (
         <section>
@@ -17,6 +29,9 @@ function ControlPanel({
                     <select
                         id="selectLevel"
                         onChange={(event) => onSelectLevel(event.target.value)}>
+                        <option value="" defaultChecked>
+                            -- Select level --
+                        </option>
                         {levels.map((level, index) => (
                             <option key={index} value={level.value}>
                                 {level.text}
@@ -24,13 +39,30 @@ function ControlPanel({
                         ))}
                     </select>
                 </fieldset>
-                {/* TODO: add button to show/hide this */}
-                <fieldset disabled={gameStarted}>
-                    <label htmlFor="customWord">Add your word: </label>
-                    <input type="text" id="customWord" />
-                    <button>Submit</button>
-                    {/* TODO: Disable button when the textbox is empty */}
-                </fieldset>
+                <button onClick={setShowCustomWords(!showCustomWords)}>
+                    {showCustomWords ? 'Hide' : 'Show'}
+                </button>
+                {showCustomWords && (
+                    <fieldset disabled={gameStarted}>
+                        <label htmlFor="customWord">Add your word: </label>
+                        <input
+                            type="text"
+                            id="customWord"
+                            value={wordInput}
+                            onChange={(event) =>
+                                setWordInput(event.target.value)
+                            }
+                        />
+                        <button
+                            onClick={handlerAddWord}
+                            disabled={wordInput.length === 0}>
+                            Submit
+                        </button>
+                        {customWords.map((word, index) => (
+                            <p key={index}>{word}</p>
+                        ))}
+                    </fieldset>
+                )}
                 <button
                     disabled={selectedLevel === levels[0].value || gameStarted}
                     onClick={onGameStart}>

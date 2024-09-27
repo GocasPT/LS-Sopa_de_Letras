@@ -45,19 +45,13 @@ function GamePanel({
                 word === selectedWord.split('').reverse().join('')
             ) {
                 setFoundWords((previouseState) => [...previouseState, word]);
-                onUpdatePoints(
-                    (previouseState) => previouseState + word.length * 10,
-                ); // TODO: see this part (handle from App.js)
+                onUpdatePoints(word); // TODO: see this part (handle from App.js)
                 setBoard(highlightCells(cell1, cell2, board)); // TODO: improve highlight system (not background color → layer)
             }
         });
 
         setSelectedCells([]);
     };
-
-    /* useEffect(() => {
-        // TODO: see this useEffect
-    }, [gameStarted]) */
 
     // TODO: see this useEffect
     useEffect(() => {
@@ -94,11 +88,6 @@ function GamePanel({
                     <p>Points: {points}</p>
                 </>
             ) : null}
-            <Board
-                board={board}
-                boardSize={boardConfig.size}
-                onSelect={handleClickCell}
-            />
             {gameStarted || wordsList.length > 0 ? (
                 <ul>
                     {wordsList.map((word, index) => (
@@ -114,6 +103,11 @@ function GamePanel({
                     ))}
                 </ul>
             ) : null}
+            <Board
+                board={board}
+                boardSize={boardConfig.size}
+                onSelect={handleClickCell}
+            />
         </section>
     );
 }

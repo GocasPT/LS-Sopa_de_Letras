@@ -1,4 +1,3 @@
-import { Cell } from '../';
 import { LEVELS_CONFIG } from '../../constants';
 import './board.css';
 
@@ -15,11 +14,14 @@ function Board({ board, boardSize, onSelect }) {
     return (
         <div className={'board ' + classNameGrid}>
             {board.map((item, index) => (
-                <Cell
+                <button
                     key={index}
-                    item={item}
-                    onSelect={() => onSelect(item.row, item.col)}
-                />
+                    onClick={() => onSelect(item.row, item.col)}
+                    className={item.highlight ? 'highlight' : ''}
+                    id={item.highlight ? '1' : ''}>
+                    {/* TODO: highlight system (switch colors) */}
+                    {item.letter}
+                </button>
             ))}
         </div>
     );

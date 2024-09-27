@@ -1,4 +1,4 @@
-import { generateBoard } from './';
+import { generateBoard } from '.';
 
 const Diraction = [
     { row: -1, col: 0 },
@@ -11,7 +11,7 @@ const Diraction = [
     { row: 1, col: 1 },
 ];
 
-function generateBoardWithWords(size, words) {
+function fillBoardWithWords(size, words) {
     const board = generateBoard(size);
 
     words = words.map((word) => word.toUpperCase());
@@ -70,4 +70,4 @@ function canPlaceWord(board, word, row, col, direction) {
     return true;
 }
 
-export default generateBoardWithWords;
+export default fillBoardWithWords;
