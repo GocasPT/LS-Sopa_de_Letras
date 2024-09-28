@@ -29,6 +29,12 @@ function GamePanel({
         }
     };
 
+    const clearStates = () => {
+        setFoundWords([]);
+        setSelectedCells([]);
+        setCellsWords([]);
+    };
+
     const checkWord = () => {
         const [cell1, cell2] = selectedCells;
         const selectedWord = getWord(cell1, cell2, board);
@@ -62,6 +68,7 @@ function GamePanel({
             setBoard(generateBoard(boardConfig.size));
         } else {
             setBoard(fillBoardWithWords(boardConfig.size, wordsList));
+            clearStates();
         }
     }, [boardConfig, wordsList]);
 
@@ -86,18 +93,19 @@ function GamePanel({
     }
 
     return (
-        <section className="game-panel">
-            {gameState === GAME_STATES.InGame && (
+        <section className="main-content game-panel">
+            {wordsList.length > 0 && (
                 <div className="game-panel-info">
+                    {/* TODO: improve UI */}
                     <Time time={timer} />
                     <div className="score">
                         <span className="score-value">{points} pt</span>
                     </div>
                 </div>
             )}
-            {(gameState === GAME_STATES.InGame ||
-                gameState === GAME_STATES.GameOver) && (
+            {wordsList.length > 0 && (
                 <ul className="words-list">
+                    {/* TODO: improve UI */}
                     {wordsList.map((word, index) => (
                         <li
                             key={index}

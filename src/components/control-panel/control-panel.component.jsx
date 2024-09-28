@@ -17,8 +17,22 @@ function ControlPanel({
         onSelectLevel(event.target.value);
     };
 
-    const handleAddCustomWord = (word) => {
-        onCustomWords((prevCustomWords) => [...prevCustomWords, word]);
+    const handleAddCustomWord = (word, event) => {
+        event.preventDefault();
+        if (word.trim()) {
+            onCustomWords(word);
+            setWordInput('');
+        }
+    };
+
+    const handleToggleCustomWords = (event) => {
+        event.preventDefault();
+        setShowCustomWords((prevState) => !prevState);
+    };
+
+    const handleStartGame = (event) => {
+        event.preventDefault();
+        onGameState();
     };
 
     return (
@@ -47,10 +61,9 @@ function ControlPanel({
                 </fieldset>
                 <button
                     disabled={gameState === GAME_STATES.InGame}
-                    onClick={() =>
-                        setShowCustomWords((prevState) => !prevState)
-                    }>
-                    Custom words
+                    onClick={handleToggleCustomWords}>
+                    {showCustomWords ? '˄' : '˅'} Custom words
+                    {/* TODO: improve UI */}
                 </button>
                 {showCustomWords && (
                     <fieldset className="form-group">
@@ -68,7 +81,9 @@ function ControlPanel({
                         <button
                             id="btAddCustomWord"
                             disabled={gameState === GAME_STATES.InGame}
-                            onClick={() => handleAddCustomWord(wordInput)}>
+                            onClick={(event) =>
+                                handleAddCustomWord(wordInput, event)
+                            }>
                             Add
                         </button>
                         <ul>
@@ -80,12 +95,13 @@ function ControlPanel({
                 )}
                 <button
                     id="btPlay"
-                    onClick={onGameState}
+                    onClick={handleStartGame}
                     disabled={
                         gameState === GAME_STATES.InGame ||
                         selectedLevel === LEVELS.Default.value
                     }>
                     {gameState === GAME_STATES.InGame ? 'In game...' : 'Start'}
+                    {/* TODO: improve UI */}
                 </button>
             </form>
         </section>

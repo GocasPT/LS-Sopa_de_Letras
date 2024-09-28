@@ -1,8 +1,11 @@
 #background {
-    position: absolute;
-    top: -40%;
-    left: -10%;
+    position: fixed;
+    top: -20vh;
+    left: 0;
+    width: 200vw;
+    height: 200vh;
     z-index: -100;
+    overflow: hidden;
 }
 
 #background .row {
@@ -10,20 +13,21 @@
     display: flex;
     white-space: nowrap;
     transform: rotate(-4deg);
+    overflow: hidden;
 }
 
 #background .row img {
     opacity: 0.2;
     height: 80px;
     width: auto;
-
-    padding: 10px 10px;
+    padding: 10px;
 }
 
 #background .row div {
     animation: animate 240s linear infinite;
-    animation-delay: -240s;
+    animation-delay: calc(-240s + (var(--row-index)) * 2s);
 }
+
 @keyframes animate {
     0% {
         transform: translateX(0%);
