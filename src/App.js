@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LEVELS, LEVELS_CONFIG } from './constants';
+import { GAME_STATES, LEVELS_CONFIG } from './constants';
 import { ControlPanel, GameOverModel, GamePanel } from './components';
 import { getListWords } from './helpers';
 import './assets/styles/App.css';
@@ -7,19 +7,17 @@ import './assets/styles/App.css';
 let timerId;
 
 function App() {
-    const [gameStarted, setGameStart] = useState(false);
-    const [gameOver, setGameOver] = useState(false);
-    const [boardConfig, setBoardConfig] = useState(LEVELS_CONFIG[0]);
+    const [gameState, setGameState] = useState(GAME_STATES.Ready);
+    const [selectedLevel, setSelectedLevel] = useState('');
+    const [boardConfig, setBoardConfig] = useState(LEVELS_CONFIG.Default);
     const [words, setWords] = useState([]);
     const [customWords, setCustomWords] = useState([]);
-    const [timer, setTimer] = useState(LEVELS_CONFIG[1].time);
+    const [timer, setTimer] = useState(LEVELS_CONFIG.Default.time);
     const [points, setPoints] = useState(0);
 
     const handleSelectLevel = (level) => {
-        setBoardConfig(
-            LEVELS_CONFIG.find((config) => config.value === level) ||
-                LEVELS_CONFIG[0],
-        );
+        setSelectedLevel(level);
+        setBoardConfig(LEVELS_CONFIG[level] || LEVELS_CONFIG.Default);
     };
 
     const handlCustomWords = (word) => {
@@ -27,36 +25,42 @@ function App() {
     };
 
     const handleGameStart = () => {
-        if (gameStarted) {
-            setGameStart(false);
-            setGameOver(true);
-        } else {
-            setWords([
-                ...(getListWords(boardConfig.words - customWords.length) +
-                    customWords),
-            ]);
-            setGameStart(true);
+        switch (gameState) {
+            case GAME_STATES.Ready:
+                setWords([
+                    ...getListWords(boardConfig.words - customWords.length),
+                    ...customWords,
+                ]);
+                setTimer(boardConfig.time);
+                setGameState(GAME_STATES.InGame);
+                break;
+
+            case GAME_STATES.InGame:
+                setGameState(GAME_STATES.GameOver);
+                break;
+
+            case GAME_STATES.GameOver:
+                setGameState(GAME_STATES.Ready);
         }
     };
 
     useEffect(() => {
-        if (gameStarted) {
+        if (gameState === GAME_STATES.InGame) {
             timerId = setInterval(() => {
-                let nextTimer;
                 setTimer((previousState) => {
-                    nextTimer = previousState - 1;
+                    const nextTimer = previousState - 1;
+
+                    if (nextTimer === 0) {
+                        setGameState(GAME_STATES.GameOver);
+                    }
+
                     return nextTimer;
                 });
-
-                if (nextTimer === 0) {
-                    setGameStart(false);
-                    setGameOver(true);
-                }
             }, 1000);
-        } else if (timer !== LEVELS_CONFIG[1].time) {
-            setTimer(LEVELS_CONFIG[1].time);
-            updatePoints();
-            setGameOver(true);
+        } else if (timer !== boardConfig.time) {
+            setTimer(boardConfig.time);
+            updatePoints('');
+            setGameState(GAME_STATES.GameOver);
         }
 
         return () => {
@@ -64,7 +68,14 @@ function App() {
                 clearInterval(timerId);
             }
         };
-    }, [gameStarted]);
+    }, [gameState]);
+
+    useEffect(() => {
+        if (gameState === GAME_STATES.GameOver) {
+            setWords([]);
+            setCustomWords([]);
+        }
+    }, [boardConfig]);
 
     const updatePoints = (word) => {
         let currentPoints = points;
@@ -76,27 +87,32 @@ function App() {
     };
 
     return (
-        <main>
-            <ControlPanel
-                levels={LEVELS}
-                gameStarted={gameStarted}
-                onGameStart={handleGameStart}
-                selectedLevel={boardConfig.value}
-                onSelectLevel={handleSelectLevel}
-                customWords={customWords}
-                onCustomWords={handlCustomWords}
-            />
-            <GamePanel
-                boardConfig={boardConfig}
-                wordsList={words}
-                gameStarted={gameStarted}
-                onGameStart={handleGameStart}
-                points={points}
-                onUpdatePoints={updatePoints}
-                timer={timer}
-            />
-            <GameOverModel isOpen={gameOver} points={points} timer={timer} />
-        </main>
+        <div className="container">
+            <main className="main-content">
+                <ControlPanel
+                    gameState={gameState}
+                    onGameState={handleGameStart}
+                    selectedLevel={selectedLevel}
+                    onSelectLevel={handleSelectLevel}
+                    customWords={customWords}
+                    onCustomWords={handlCustomWords}
+                />
+                <GamePanel
+                    boardConfig={boardConfig}
+                    wordsList={words}
+                    gameState={gameState}
+                    onGameState={handleGameStart}
+                    points={points}
+                    onUpdatePoints={updatePoints}
+                    timer={timer}
+                />
+                <GameOverModel
+                    isOpen={gameState === GAME_STATES.GameOver}
+                    points={points}
+                    handleClose={() => setGameState(GAME_STATES.Ready)}
+                />
+            </main>
+        </div>
     );
 }
 

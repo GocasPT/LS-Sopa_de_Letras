@@ -1,12 +1,10 @@
-.gamePanel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid #000;
-    padding: 10px;
-}
+/**********************************************
+*** © Linguagens Script > DEIS > ISEC > IPC 
+*** Jogo de Memória em React
+*** Estilos para game-panel.componente.jsx 
+**********************************************/
 
-li.done {
-    text-decoration: line-through;
+#game-panel {
+    width: 100%;
+    margin: 0 auto;
 }
