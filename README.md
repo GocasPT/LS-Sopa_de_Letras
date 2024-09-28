@@ -12,6 +12,6 @@ Nota: 35%
 
 Funções em falta:
 
--   [ ] Ligaração da geração das palavras na grelha
--   [ ] Pontuação
+-   [x] Ligaração da geração das palavras na grelha
+-   [x] Pontuação
 -   [ ] [Muita parte do trabalho]
