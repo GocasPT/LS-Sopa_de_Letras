@@ -45,7 +45,6 @@ export const COLORS = [
     'rgba(128, 0, 128, 0.5)', // Purple
     'rgba(0, 128, 128, 0.5)', // Teal
     'rgba(192, 192, 192, 0.5)', // Silver
-    'rgba(128, 128, 128, 0.5)', // Gray
     'rgba(255, 192, 203, 0.5)', // Pink
     'rgba(75, 0, 130, 0.5)', // Indigo
     'rgba(240, 230, 140, 0.5)', // Khaki

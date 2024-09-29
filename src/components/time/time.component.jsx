@@ -13,7 +13,11 @@ function Time({ time }) {
             seconds = '0' + seconds;
         }
 
-        return minutes + ':' + seconds;
+        if (minutes !== 0) {
+            return minutes + ':' + seconds;
+        } else {
+            return seconds;
+        }
     }
 
     return (

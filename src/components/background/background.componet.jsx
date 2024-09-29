@@ -74,7 +74,7 @@ function Background({ height, weight }) {
         ));
     };
 
-    const rows = Math.ceil(height / 60);
+    const rows = Math.ceil(height / 65);
 
     return <section id="background">{generateBackground(rows)}</section>;
 }

@@ -1,6 +1,6 @@
 .board {
     position: relative;
-    border: 1px solid #000;
+    margin-top: 10px;
     display: grid;
 }
 
@@ -37,6 +37,5 @@ svg {
 
 line {
     stroke-width: 46px;
-    opacity: 0.5;
     stroke-linecap: round;
 }

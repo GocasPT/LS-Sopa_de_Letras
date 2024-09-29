@@ -39,27 +39,36 @@ function GamePanel({
         const [cell1, cell2] = selectedCells;
         const selectedWord = getWord(cell1, cell2, board);
 
-        wordsList.forEach((word) => {
-            word = word.toUpperCase();
+        try {
+            wordsList.forEach((word) => {
+                word = word.toUpperCase();
 
-            if (
-                word === selectedWord ||
-                word === selectedWord.split('').reverse().join('')
-            ) {
-                setFoundWords((previouseState) => [...previouseState, word]);
-                onUpdatePoints(word); // TODO: see this part (handle from App.js)
-            }
-        });
+                if (
+                    word === selectedWord ||
+                    word === selectedWord.split('').reverse().join('')
+                ) {
+                    setFoundWords((previouseState) => [
+                        ...previouseState,
+                        word,
+                    ]);
+                    onUpdatePoints(word); // TODO: see this part (handle from App.js)
+                    setCellsWords((previouseState) => [
+                        ...previouseState,
+                        {
+                            cell1,
+                            cell2,
+                            color: COLORS[
+                                Math.floor(Math.random() * COLORS.length)
+                            ],
+                        },
+                    ]);
+                }
+            });
+        } catch (error) {
+            return;
+        }
 
         setSelectedCells([]);
-        setCellsWords((previouseState) => [
-            ...previouseState,
-            {
-                cell1,
-                cell2,
-                color: COLORS[Math.floor(Math.random() * COLORS.length)],
-            },
-        ]);
     };
 
     // TODO: see this useEffect
@@ -93,11 +102,11 @@ function GamePanel({
     }
 
     return (
-        <section className="main-content game-panel">
+        <section id="game-panel">
             {wordsList.length > 0 && (
                 <div className="game-panel-info">
                     {/* TODO: improve UI */}
-                    <Time time={timer} />
+                    {gameState === GAME_STATES.InGame && <Time time={timer} />}
                     <div className="score">
                         <span className="score-value">{points} pt</span>
                     </div>

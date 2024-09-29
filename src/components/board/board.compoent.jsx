@@ -11,15 +11,12 @@ function Board({ board, boardSize, onSelect, cellsWords }) {
                 ? 'board--hard'
                 : '';
 
-    /* onMouseEnter={} */
-
     return (
         <div className={'board ' + classNameGrid}>
             {board.map((item, index) => (
                 <button
                     key={index}
                     onClick={() => onSelect(item.row, item.col)}>
-                    {/* TODO: highlight system (switch colors) */}
                     {item.letter}
                 </button>
             ))}

@@ -14,4 +14,4 @@ Funções em falta:
 
 -   [x] Ligaração da geração das palavras na grelha
 -   [x] Pontuação
--   [ ] [Muita parte do trabalho]
+-   [x] [Muita parte do trabalho]

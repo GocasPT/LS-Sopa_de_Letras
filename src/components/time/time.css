@@ -1,0 +1,9 @@
+.time {
+    padding: 15px;
+}
+
+.time .time-value {
+    font-size: larger;
+    font-weight: bolder;
+    color: var(--globalColor);
+}

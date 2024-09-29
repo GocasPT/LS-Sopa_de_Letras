@@ -25,7 +25,7 @@
 
 #background .row div {
     animation: animate 240s linear infinite;
-    animation-delay: calc(-240s + (var(--row-index)) * 2s);
+    animation-delay: -240s;
 }
 
 @keyframes animate {
